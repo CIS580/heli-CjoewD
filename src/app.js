@@ -29,6 +29,14 @@ var input = {
   right: false
 }
 
+var camera = {
+	xMin: 100,
+	xMax: 924,
+	xOff: 100,
+	x: 0,
+	y, 0
+}
+
 /**
  * @function onkeydown
  * Handles keydown events
@@ -123,9 +131,16 @@ function update(elapsedTime) {
   if(player.velocity.x < 0) player.angle = -Math.PI/8;
   if(player.velocity.x > 0) player.angle = Math.PI/8;
 
+  
   // move the player
   player.position.x += player.velocity.x;
   player.position.y += player.velocity.y;
+
+  
+  //update the camera
+  camera.x += player.velocity.x;
+  
+  
 }
 
 /**
@@ -137,13 +152,24 @@ function update(elapsedTime) {
   */
 function render(elapsedTime, ctx) {
   // Render the backgrounds
+  ctx.save();
+  ctx.translate(-player.position.x * 0.2, 0);
   ctx.drawImage(backgrounds[2], 0, 0);
+  ctx.restore();
+  
+  cts.save();
+  ctx.translate(-player.position.x * 0.6, 0);
   ctx.drawImage(backgrounds[1], 0, 0);
+  ctx.restore();
+  
+  ctx.save();
+  ctx.translate(-camera.xOff - camera.x, 0);
   ctx.drawImage(backgrounds[0], 0, 0);
+  ctx.restore();
 
   // Render the player
   ctx.save();
-  ctx.translate(player.position.x, player.position.y);
+  ctx.translate(camera.xOff, player.position.y);
   ctx.rotate(player.angle);
   ctx.drawImage(player.img, 0, 0, 131, 53, -60, 0, 131, 53);
   ctx.restore();
