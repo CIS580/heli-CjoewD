@@ -1,6 +1,6 @@
 "use strict";
 
-/* Classes and Libraries */
+/* Classes and Libraries. */
 const Vector = require('./vector');
 
 /**
