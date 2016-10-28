@@ -7,7 +7,7 @@
  * as this creates a single memory buffer we can
  * iterate over, minimizing cache misses.
  * Values stored are: positionX, positionY, velocityX,
- * velocityY in that order.
+ * velocityY in that order...
  */
 module.exports = exports = BulletPool;
 
